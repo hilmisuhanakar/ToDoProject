@@ -1,0 +1,27 @@
+﻿@model ToDoProject.Web.Models.User
+
+<h1>Giriş Yap</h1>
+<br />
+<form asp-controller="Login" asp-action="Index"
+      method="post">
+    <table>
+        <tr>
+            <td><label asp-for="UserName"></label></td>
+            <td><input asp-for="UserName" /></td>
+        </tr>
+        <tr>
+            <td><label asp-for="UserPassword"></label></td>
+            <td><input asp-for="UserPassword" type="password" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit"
+                       value="Giriş" />
+            </td>
+        </tr>
+    </table>
+    <div asp-validation-summary="All"></div>
+
+    <br />
+    <div class="text-danger">@ViewData["message"]</div>
+</form>
