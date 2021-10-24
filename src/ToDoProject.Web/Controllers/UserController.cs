@@ -44,6 +44,7 @@ namespace ToDoProject.Web.Controllers
             return View(user);
         }
 
+        [AllowAnonymous]
         // GET: User/Create
         public IActionResult Create()
         {
@@ -53,6 +54,8 @@ namespace ToDoProject.Web.Controllers
         // POST: User/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+
+        [AllowAnonymous]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,UserName,UserPassword,Name,Surname")] User user)
