@@ -26,15 +26,12 @@ namespace ToDoProject.Web.Controllers
         {
             bool isUservalid = false;
 
-            User user = db.Users.Where(usr =>
-        usr.UserName == model.UserName &&
-        usr.UserPassword == model.UserPassword).SingleOrDefault();
+            User user = db.Users.Where(usr => usr.UserName == model.UserName && usr.UserPassword == model.UserPassword).SingleOrDefault();
 
             if (user != null)
             {
                 isUservalid = true;
             }
-
 
             if (ModelState.IsValid && isUservalid)
             {
