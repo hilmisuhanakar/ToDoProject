@@ -40,7 +40,8 @@
                 @Html.DisplayFor(modelItem => item.TaskDescription)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.User.UserName)
+                @Html.DisplayFor(modelItem => item.User.Name)
+                @Html.DisplayFor(modelItem => item.User.Surname)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Düzenle</a> |
