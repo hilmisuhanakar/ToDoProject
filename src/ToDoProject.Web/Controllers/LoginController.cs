@@ -10,6 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using ToDoProject.Web.Models;
+using Microsoft.AspNetCore.Session;
 
 namespace ToDoProject.Web.Controllers
 {
@@ -35,6 +36,7 @@ namespace ToDoProject.Web.Controllers
 
             if (ModelState.IsValid && isUservalid)
             {
+                HttpContext.Session.SetInt32("Id", user.Id);
                 var claims = new List<Claim>();
 
                 claims.Add(new Claim(ClaimTypes.Name, user.UserName));

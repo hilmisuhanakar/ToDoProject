@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,8 @@ namespace ToDoProject.Web.Controllers
         // GET: Task
         public async Task<IActionResult> Index()
         {
-            var toDoDbContext = _context.Tasks.Include(t => t.User);
+            var id = HttpContext.Session.GetInt32("Id");
+            var toDoDbContext = _context.Tasks.Include(t => t.User).Where(x=> x.UserId==id);
             return View(await toDoDbContext.ToListAsync());
         }
 
@@ -49,7 +51,8 @@ namespace ToDoProject.Web.Controllers
         // GET: Task/Create
         public IActionResult Create()
         {
-            ViewData["UserId"] = new SelectList(_context.Users, "Id", "UserName");
+            var id = HttpContext.Session.GetInt32("Id");
+            ViewData["UserId"] = new SelectList(_context.Users.Where(x => x.Id == id).ToList(), "Id", "UserName");
             return View();
         }
 

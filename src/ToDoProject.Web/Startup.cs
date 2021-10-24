@@ -36,6 +36,14 @@ namespace ToDoProject.Web
                 });
             services.AddDbContext<ToDoDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("ToDoDbContext")));
+            services.AddDistributedMemoryCache();
+
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -55,7 +63,7 @@ namespace ToDoProject.Web
             app.UseStaticFiles();
 
             app.UseRouting();
-
+            app.UseSession();
             app.UseAuthentication();
             app.UseAuthorization();
 
