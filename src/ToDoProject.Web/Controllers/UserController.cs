@@ -62,9 +62,16 @@ namespace ToDoProject.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                _context.Add(user);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                if (_context.Users.Where(x=>x.UserName == user.UserName).Count()>0)
+                {
+                    ViewData["message"] = "Kullanıcı adı daha önce kullanılmıştır";
+                }
+                else
+                {
+                    _context.Add(user);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
             }
             return View(user);
         }
